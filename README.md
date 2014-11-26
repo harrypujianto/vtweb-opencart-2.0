@@ -25,3 +25,4 @@ This is the official Veritrans extension for the OpenCart E-commerce platform.
 
   * **Unfinish Redirect URL** in Settings to `http://[your shop's homepage]/index.php`
 
+rewrite by CBY
