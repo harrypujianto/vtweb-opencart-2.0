@@ -58,7 +58,7 @@
 							</div>
 							<div class="col-sm-3">
 								<?php if (isset($error['display_name'])) { ?>
-								<div class="col-sm-3> <?php echo $error['display_name']; ?> </div>
+								<div class="col-sm-3"> <?php echo $error['display_name']; ?> </div>
 								<?php } ?>
 							</div>
 						</div>
@@ -76,7 +76,7 @@
 							</div>	
 							<div class="col-sm-3">
 								<?php if (isset($error['environment'])) { ?>
-								<div class="col-sm-3> <?php echo $error['environment']; ?> </div>
+								<div class="col-sm-3"> <?php echo $error['environment']; ?> </div>
 								<?php } ?> 
 							</div>
 						</div>
@@ -89,7 +89,7 @@
 							</div>
 							<div class="col-sm-3">
 								<?php if (isset($error['client_key_v2'])) { ?>
-								<div class="col-sm-3> <?php echo $error['client_key_v2']; ?> </div>
+								<div class="col-sm-3"> <?php echo $error['client_key_v2']; ?> </div>
 								<?php } ?>
 							</div>
 						</div>
@@ -103,7 +103,7 @@
 							</div>
 							<div class="col-sm-3">
 								<?php if (isset($error['server_key_v2'])) { ?>
-								<div class="col-sm-3> <?php echo $error['server_key_v2']; ?> </div>
+								<div class="col-sm-3"> <?php echo $error['server_key_v2']; ?> </div>
 								<?php } ?>
 							</div>
 						</div>
@@ -121,7 +121,7 @@
 							</div>	
 							<div class="col-sm-3">
 								<?php if (isset($error['environment'])) { ?>
-								<div class="col-sm-3> <?php echo $error['environment']; ?> </div>
+								<div class="col-sm-3"> <?php echo $error['environment']; ?> </div>
 								<?php } ?> 
 							</div>
 						</div>
@@ -238,19 +238,18 @@
 					<!-- VTWeb Mapping -->
 						
 					  
-					<?php if ($curr == true): ?>
 						<div class="form-group required">
 							<label class="col-sm-2 control-label" for="input-merchant-id"><?php echo $entry_currency_conversion; ?></label>
 							<div class="col-sm-3">
 							  <input type="text" name="veritrans_currency_conversion" value="<?php echo $veritrans_currency_conversion; ?>" class="form-control" />
+							  <span>Set to 1 if your default currency is IDR</span>
 							</div>
 							<div class="col-sm-3">
 								<?php if (isset($error['currency_conversion'])) { ?>
-								<div class="col-sm-3> <?php echo $error['currency_conversion']; ?> </div>
+								<div class="col-sm-3"> <?php echo $error['currency_conversion']; ?> </div>
 								<?php } ?>
 							</div>
 						</div>
-					<?php endif ?>
 					<!-- Currency -->
 										
 					<div class="form-group v2_vtweb_settings">
