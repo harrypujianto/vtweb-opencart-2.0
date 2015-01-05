@@ -275,6 +275,9 @@
 							  <input size="1" type="text" name="veritrans_sort_order" value="<?php echo $veritrans_sort_order; ?>" class="form-control" />
 							</div>
 						</div>
+						<div>
+							<center><font size="1">version 1.0</font></center>
+						</div>	
 	
 				  </form>
 			 </div>
