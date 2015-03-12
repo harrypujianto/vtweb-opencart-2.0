@@ -135,7 +135,9 @@
 								'cimb_clicks' => 'CIMB Clicks',
 								'mandiri_clickpay' => 'Mandiri ClickPay',
 								'bank_transfer' => 'Permata VA',
-								'bri_epay' 		=> 'Bri e-Pay'
+								'bri_epay' 		=> 'Bri e-Pay',
+								'telkomsel_cash'=> 'T-Cash',
+								'xl_tunai' 		=> 'xl tunai'
 							  );
 						  ?>
 						  <div class="checkbox">

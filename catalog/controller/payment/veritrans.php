@@ -241,59 +241,29 @@ class ControllerPaymentVeritrans extends Controller {
 		
         $installment_terms = array();
 
-        foreach ($products as $product){
+        foreach ($products as $product)
+        {
           //$options = $product['option'];
 		  
-		  	foreach ($product['option'] as $option) {
-			
+  		  	foreach ($product['option'] as $option) 
+          {
+        			if ($option['name'] == 'Payment') 
+              {   
+    		    
+             	 $installment_value = explode(' ', $option['value']);
+              // error_log($installment_value[0]);
+              // error_log($installment_value[1]);
+    			    // error_log($installment_value[2]);
+                  if (strtolower($installment_value[0]) == 'installment') 
+                  {
+                    $is_installment = true;
+                    $installment_terms[strtolower($installment_value[1])]
+                      = array($installment_value[2]);
+                  }
+              }
 
-				error_log('value='.$option['value']);
-				error_log('option name='.$option['name']);
-				error_log('option type='.$option['type']);
-				error_log('option productoptionid='.$option['product_option_id']);
-				error_log('option product_option_value_id='.$option['product_option_value_id']);
-				error_log('option option_id='.$option['option_id']);
-				error_log('option option_value_id='.$option['option_value_id']);
-				
-			if ($option['name'] == 'Payment') {   
-			 $installment_value = explode(' ', $option['value']);
-			 error_log('explode1'.$installment_value[0]);
-			 error_log('explode2'.$installment_value[1]);
-			 error_log('explode3'.$installment_value[2]);
-			 
-              if (strtolower($installment_value[0]) == 'installment') {
-                $is_installment = true;
-                $installment_terms[strtolower($installment_value[1])]
-                  = array($installment_value[2]);
-              }
-            }
-				
-			/*
-				$option_data[] = array(
-					'product_option_id'       => $option['product_option_id'],
-					'product_option_value_id' => $option['product_option_value_id'],
-					'option_id'               => $option['option_id'],
-					'option_value_id'         => $option['option_value_id'],								   
-					'name'                    => $option['name'],
-					'value'                   => $value,
-					'type'                    => $option['type']
-				);
-			*/	
-			}		  
-		/*     
-		foreach ($options as $option) {
-            if ($option['name'] == 'Payment') {
-        
-           
-			 $installment_value = explode(' ', $option['option_value']);
-              if (strtolower($installment_value[0]) == 'installment') {
-                $is_installment = true;
-                $installment_terms[strtolower($installment_value[1])]
-                  = array($installment_value[2]);
-              }
-            }
-          }
-		*/  
+  			   }		  
+		  
         }
 
         if ($is_installment && ($num_products == 1)
@@ -384,6 +354,13 @@ class ControllerPaymentVeritrans extends Controller {
             $this->config->get('veritrans_vtweb_failure_mapping'),
             'VT-Web payment failed.');
       }
+      else{
+        $logs .= 'cancel ';
+        $this->model_checkout_order->addOrderHistory(
+            $notif->order_id,
+            $this->config->get('veritrans_vtweb_failure_mapping'),
+            'VT-Web payment canceled.');
+      }
     }
     else if ($transaction == 'deny') {
       $logs .= 'deny ';
@@ -405,6 +382,13 @@ class ControllerPaymentVeritrans extends Controller {
           $notif->order_id,
           $this->config->get('veritrans_vtweb_success_mapping'),
           'VT-Web payment successful.');
+    }
+    else if ($transaction == 'cancel') {
+      $logs .= 'complete ';
+      $this->model_checkout_order->addOrderHistory(
+          $notif->order_id,
+          $this->config->get('veritrans_vtweb_failure_mapping'),
+          'VT-Web payment failed.');
     }
     else {
       $logs .= "*$transaction:$fraud ";
