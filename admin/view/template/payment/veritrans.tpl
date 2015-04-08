@@ -137,7 +137,8 @@
 								'bank_transfer' => 'Permata VA',
 								'bri_epay' 		=> 'Bri e-Pay',
 								'telkomsel_cash'=> 'T-Cash',
-								'xl_tunai' 		=> 'xl tunai'
+								'xl_tunai' 		=> 'xl tunai',
+								'mandiri_bill' 		=> 'Mandiri Bill'
 							  );
 						  ?>
 						  <div class="checkbox">
