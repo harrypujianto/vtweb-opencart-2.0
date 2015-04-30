@@ -138,7 +138,8 @@
 								'bri_epay' 		=> 'Bri e-Pay',
 								'telkomsel_cash'=> 'T-Cash',
 								'xl_tunai' 		=> 'xl tunai',
-								'echannel' 		=> 'Mandiri Bill'
+								'echannel' 		=> 'Mandiri Bill',
+								'bbm_money'		=> 'BBM Money'
 							  );
 						  ?>
 						  <div class="checkbox">
