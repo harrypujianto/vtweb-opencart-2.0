@@ -37,7 +37,7 @@ class ControllerPaymentVeritrans extends Controller {
     $data['button_confirm'] = $this->language->get('button_confirm');
 
     $order_info = $this->model_checkout_order->getOrder(
-        $this->session->data['order_id']);
+        $this->session->data['order_id']); 
 
     $this->model_checkout_order->addOrderHistory($this->session->data['order_id'],
         $this->config->get('veritrans_vtweb_challenge_mapping'));
@@ -77,6 +77,7 @@ class ControllerPaymentVeritrans extends Controller {
     $customer_details['phone']            = $order_info['telephone'];
 
     $products = $this->cart->getProducts();
+    
     $item_details = array();
 
     foreach ($products as $product) {
@@ -307,20 +308,15 @@ class ControllerPaymentVeritrans extends Controller {
    */
   public function payment_notification() {
     header("HTTP/1.1 200 OK");
-    error_log('payment notification');
 
     $this->load->model('checkout/order');
     $this->load->model('payment/veritrans');
 
-    Veritrans_Config::$serverKey = $this->config->
-        get('veritrans_server_key_v2');
-    $notif = new Veritrans_Notification();
-
+    Veritrans_Config::$serverKey = $this->config->get('veritrans_server_key_v2');
     $transaction = $notif->transaction_status;
     $fraud = $notif->fraud_status;
 
     $logs = '';
-
     if ($transaction == 'capture') {
       $logs .= 'capture ';
       if ($fraud == 'challenge') {
@@ -340,28 +336,11 @@ class ControllerPaymentVeritrans extends Controller {
       }
     }
     else if ($transaction == 'cancel') {
-      $logs .= 'cancel ';
-      if ($fraud == 'challenge') {
-        $logs .= 'challenge ';
-        $this->model_checkout_order->addOrderHistory(
-            $notif->order_id,
-            $this->config->get('veritrans_vtweb_failure_mapping'),
-            'VT-Web payment failed.');
-      }
-      else if ($fraud == 'accept') {
-        $logs .= 'accept ';
-        $this->model_checkout_order->addOrderHistory(
-            $notif->order_id,
-            $this->config->get('veritrans_vtweb_failure_mapping'),
-            'VT-Web payment failed.');
-      }
-      else{
         $logs .= 'cancel ';
         $this->model_checkout_order->addOrderHistory(
             $notif->order_id,
             $this->config->get('veritrans_vtweb_failure_mapping'),
             'VT-Web payment canceled.');
-      }
     }
     else if ($transaction == 'deny') {
       $logs .= 'deny ';
@@ -370,7 +349,7 @@ class ControllerPaymentVeritrans extends Controller {
           $this->config->get('veritrans_vtweb_failure_mapping'),
           'VT-Web payment failed.');
     }    
-	else if ($transaction == 'pending') {
+	  else if ($transaction == 'pending') {
       $logs .= 'pending ';
       $this->model_checkout_order->addOrderHistory(
           $notif->order_id,
@@ -384,13 +363,6 @@ class ControllerPaymentVeritrans extends Controller {
           $this->config->get('veritrans_vtweb_success_mapping'),
           'VT-Web payment successful.');
     }
-    else if ($transaction == 'cancel') {
-      $logs .= 'complete ';
-      $this->model_checkout_order->addOrderHistory(
-          $notif->order_id,
-          $this->config->get('veritrans_vtweb_failure_mapping'),
-          'VT-Web payment failed.');
-    }
     else {
       $logs .= "*$transaction:$fraud ";
       $this->model_checkout_order->addOrderHistory(
@@ -399,7 +371,6 @@ class ControllerPaymentVeritrans extends Controller {
           'VT-Web payment challenged. Please take action on '
             . 'your Merchant Administration Portal.');
     }
-
     error_log($logs);
   }
 }
