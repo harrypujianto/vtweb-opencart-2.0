@@ -9,17 +9,16 @@ class ControllerPaymentVeritrans extends Controller {
     $data['errors'] = array();
     $data['button_confirm'] = $this->language->get('button_confirm');
 	
-	$data['pay_type'] = $this->config->get('veritrans_payment_type');
-	
-	$data['process_order'] = $this->url->link('payment/veritrans/process_order');
-	
+  	$data['pay_type'] = $this->config->get('veritrans_payment_type');
+  	
+  	$data['process_order'] = $this->url->link('payment/veritrans/process_order');
+  	
     if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/veritrans.tpl')) {
-      return $this->load->view($this->config->get('config_template') . '/template/payment/veritrans.tpl',$data);
-	} else {
-	  return $this->load->view('default/template/payment/veritrans.tpl', $data);
-	}
-	
- 
+        return $this->load->view($this->config->get('config_template') . '/template/payment/veritrans.tpl',$data);
+  	} else {
+  	  return $this->load->view('default/template/payment/veritrans.tpl', $data);
+  	}
+
   }
 
   /**
@@ -37,7 +36,7 @@ class ControllerPaymentVeritrans extends Controller {
     $data['button_confirm'] = $this->language->get('button_confirm');
 
     $order_info = $this->model_checkout_order->getOrder(
-        $this->session->data['order_id']); 
+        $this->session->data['order_id']);
 
     $this->model_checkout_order->addOrderHistory($this->session->data['order_id'],
         $this->config->get('veritrans_vtweb_challenge_mapping'));
@@ -207,8 +206,9 @@ class ControllerPaymentVeritrans extends Controller {
 
       $payloads['vtweb']['enabled_payments'] = $enabled_payments;
       $is_installment = false;
-
-      if ($this->config->get('veritrans_installment_option') == 'all_product') {
+      error_log($this->config->get('veritrans_installment_option'));
+      if ($this->config->get('veritrans_installment_option') == 'all_product') 
+      {
         $payment_options = array(
           'installment' => array(
             'required' => false
@@ -220,8 +220,8 @@ class ControllerPaymentVeritrans extends Controller {
 
           foreach ($this->config->get('veritrans_installment_banks')
               as $key => $value) {
-			$a = $this->config->get('veritrans_installment_' . $key . '_term');
-			$term_array = explode(',', $a);
+			    $a = $this->config->get('veritrans_installment_' . $key . '_term');
+			    $term_array = explode(',', $a);
             $installment_terms[$key] = $term_array;
           }
 
@@ -232,7 +232,8 @@ class ControllerPaymentVeritrans extends Controller {
           $payloads['vtweb']['payment_options'] = $payment_options;
         }
       }
-      else if ($this->config->get('veritrans_installment_option') == 'certain_product'){
+      else if ($this->config->get('veritrans_installment_option') == 'certain_product')
+      {
 
         $payment_options = array(
           'installment' => array(
@@ -252,9 +253,9 @@ class ControllerPaymentVeritrans extends Controller {
               {   
     		    
              	 $installment_value = explode(' ', $option['value']);
-              // error_log($installment_value[0]);
-              // error_log($installment_value[1]);
-    			    // error_log($installment_value[2]);
+               error_log($installment_value[0]);
+               error_log($installment_value[1]);
+    			     error_log($installment_value[2]);
                   if (strtolower($installment_value[0]) == 'installment') 
                   {
                     $is_installment = true;
@@ -298,6 +299,7 @@ class ControllerPaymentVeritrans extends Controller {
     catch (Exception $e) {
       $data['errors'][] = $e->getMessage();
       error_log($e->getMessage());
+      echo $e->getMessage();
     }
   }
 
@@ -311,7 +313,7 @@ class ControllerPaymentVeritrans extends Controller {
 
     $this->load->model('checkout/order');
     $this->load->model('payment/veritrans');
-
+    Veritrans_Config::$isProduction = $this->config->get('veritrans_environment') == 'production' ? true : false;
     Veritrans_Config::$serverKey = $this->config->get('veritrans_server_key_v2');
     $transaction = $notif->transaction_status;
     $fraud = $notif->fraud_status;
