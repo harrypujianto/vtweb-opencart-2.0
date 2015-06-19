@@ -311,10 +311,11 @@ class ControllerPaymentVeritrans extends Controller {
   public function payment_notification() {
     header("HTTP/1.1 200 OK");
 
-    $this->load->model('checkout/order');
-    $this->load->model('payment/veritrans');
     Veritrans_Config::$isProduction = $this->config->get('veritrans_environment') == 'production' ? true : false;
     Veritrans_Config::$serverKey = $this->config->get('veritrans_server_key_v2');
+    $this->load->model('checkout/order');
+    $this->load->model('payment/veritrans');
+    $notif = new Veritrans_Notification();
     $transaction = $notif->transaction_status;
     $fraud = $notif->fraud_status;
 
