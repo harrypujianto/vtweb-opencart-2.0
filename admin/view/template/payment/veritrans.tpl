@@ -139,7 +139,8 @@
 								'telkomsel_cash'=> 'T-Cash',
 								'xl_tunai' 		=> 'xl tunai',
 								'echannel' 		=> 'Mandiri Bill',
-								'bbm_money'		=> 'BBM Money'
+								'bbm_money'		=> 'BBM Money',
+								'cstore'		=> 'Indomaret'
 							  );
 						  ?>
 						  <div class="checkbox">
