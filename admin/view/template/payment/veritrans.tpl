@@ -140,7 +140,8 @@
 								'xl_tunai' 		=> 'xl tunai',
 								'echannel' 		=> 'Mandiri Bill',
 								'bbm_money'		=> 'BBM Money',
-								'cstore'		=> 'Indomaret'
+								'cstore'		=> 'Indomaret',
+								'indosat_dompetku' => 'Indosat Dompetku'
 							  );
 						  ?>
 						  <div class="checkbox">
