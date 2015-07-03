@@ -171,61 +171,61 @@
 						</div>
 						<!--enable 3D secure-->
 						
-						<div class="form-group v2_settings sensitive required">
+					<!-- 	<div class="form-group v2_settings sensitive required">
 						<label class="col-sm-2 control-label" for="input-merchant-id">Enable Installment</label>
 							<div class="col-sm-3">
 								<select name="veritrans_installment_option" id="installmentOption" class="form-control">
-								<?php $options = array('off' => 'Off', 'all_product' => 'All Products', 'certain_product' => 'Certain Product') ?>
-								<?php foreach ($options as $key => $value): ?>
-								<option value="<?php echo $key ?>" <?php if ($key == $veritrans_installment_option) echo 'selected' ?> ><?php echo $value ?></option>
-								<?php endforeach ?>
+								<?php //$options = array('off' => 'Off', 'all_product' => 'All Products', 'certain_product' => 'Certain Product') ?>
+								<?php// foreach ($options as $key => $value): ?>
+								<option value="<?php //echo $key ?>" <?php //if ($key == $veritrans_installment_option)// echo 'selected' ?> ><?php //echo $value ?></option>
+								<?php //endforeach ?>
 								</select>
 							</div>	
-						</div>
+						</div> -->
 						<!-- Select Installment Option (v2-specific) --> 	
 						
 						
-						<div class="form-group all_product certain_product installment ">
+						<!-- <div class="form-group all_product certain_product installment ">
 						<label class="col-sm-2 control-label" >Installment Bank</label>
 						<?php
-							$installment_banks = array(
+							/*$installment_banks = array(
 								'bni' => 'BNI',
 								'mandiri' => 'MANDIRI'                    
-							  );
+							  );*/
 						  ?>
 						  <div class="checkbox">
-						  	<?php foreach ($installment_banks as $key => $val): ?>
-							<?php $isChecked = (isset($veritrans_installment_banks) && array_key_exists($key, $veritrans_installment_banks)&& $veritrans_installment_banks[$key]);
+						  	<?php //foreach ($installment_banks as $key => $val): ?>
+							<?php //$isChecked = (isset($veritrans_installment_banks) && array_key_exists($key, $veritrans_installment_banks)&& $veritrans_installment_banks[$key]);
 							?>
 								<label>
 								<input type="checkbox" class="check-box installmentBank installmentBank_<?=$key?>" 
-								name="veritrans_installment_banks[<?php echo $key; ?>]" 
-								<?php if ($isChecked) echo 'checked'; ?>>
-									<?php echo $val; ?>		
+								name="veritrans_installment_banks[<?php //echo $key; ?>]" 
+								<?php// if ($isChecked) echo 'checked'; ?>>
+									<?php //echo $val; ?>		
 								</label>
-							  <?php endforeach ?>
+							  <?php //endforeach ?>
 							</div>
-						</div>
+						</div> -->
 						<!-- Select Bank Installment -->     		
 						
-						<div class="form-group install_term installmentTerm_bni">
+						<!-- <div class="form-group install_term installmentTerm_bni">
 							<label class="col-sm-2 control-label" >Bni Term</label>
 							<div class="col-sm-2  ">
 								<label>
 								<input type="text" class="check-box" value="<?=$veritrans_installment_bni_term?>" name="veritrans_installment_bni_term" />
 								</label>
 							</div>  
-						</div>
+						</div> -->
 						<!-- installment bank Term-->
 						
-						<div class="form-group install_term installmentTerm_mandiri">
+						<!-- <div class="form-group install_term installmentTerm_mandiri">
 							<label class="col-sm-2 control-label" >Mandiri Term</label>
 							<div class="col-sm-2  ">
 								<label>
 								<input type="text" class="check-box" name="veritrans_installment_mandiri_term" value=<?=$veritrans_installment_mandiri_term?>>              
 								</label>
 							</div>  
-						</div>
+						</div> -->
 						<!-- installment bank Term-->
 						
 					  
