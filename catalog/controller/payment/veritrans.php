@@ -318,6 +318,7 @@ class ControllerPaymentVeritrans extends Controller {
     $notif = new Veritrans_Notification();
     $transaction = $notif->transaction_status;
     $fraud = $notif->fraud_status;
+    $payment_type = $notif->payment_type;
 
     $logs = '';
     if ($transaction == 'capture') {
@@ -360,11 +361,13 @@ class ControllerPaymentVeritrans extends Controller {
           'VT-Web payment pending.');
     }
     else if ($transaction == 'settlement') {
-      $logs .= 'complete ';
-      $this->model_checkout_order->addOrderHistory(
-          $notif->order_id,
-          $this->config->get('veritrans_vtweb_success_mapping'),
-          'VT-Web payment successful.');
+          if($payment_type != 'credit_card'){
+              $logs .= 'complete ';
+              $this->model_checkout_order->addOrderHistory(
+              $notif->order_id,
+              $this->config->get('veritrans_vtweb_success_mapping'),
+              'VT-Web payment successful.');
+          }
     }
     else {
       $logs .= "*$transaction:$fraud ";
