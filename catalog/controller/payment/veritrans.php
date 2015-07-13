@@ -306,6 +306,8 @@ class ControllerPaymentVeritrans extends Controller {
   /**
    * Landing page when payment is finished or failure or customer pressed "back" button
    * The Cart is cleared here, so make sure customer reach this page to ensure the cart is emptied when payment succeed
+   * Finish/unfinish/back url : 
+   * http://[your shop’s homepage]/opencart/index.php?route=payment/veritrans/payment_notification
    */
   public function landing_redir() {
     
