@@ -293,7 +293,7 @@ class ControllerPaymentVeritrans extends Controller {
         $redirUrl = $warningUrl . $redirUrl . '&message=2';
       }
 
-      $this->cart->clear();
+      // $this->cart->clear();
       $this->response->redirect($redirUrl);
     }
     catch (Exception $e) {
@@ -301,6 +301,34 @@ class ControllerPaymentVeritrans extends Controller {
       error_log($e->getMessage());
       echo $e->getMessage();
     }
+  }
+
+  /**
+   * Landing page when payment is finished or failure or customer pressed "back" button
+   * The Cart is cleared here, so make sure customer reach this page to ensure the cart is emptied when payment succeed
+   */
+  public function landing_redir() {
+    
+    $redirUrl = $this->config->get('config_ssl');
+    error_log('redir url: '.$redirUrl); //debugan
+
+    if( isset($_GET['order_id']) && isset($_GET['transaction_status']) && ($_GET['transaction_status'] == 'capture' || $_GET['transaction_status'] == 'pending' || $_GET['transaction_status'] == 'settlement')) {
+      //if capture or pending or challenge or settlement, redirect to order received page
+      $this->cart->clear();
+      $redirUrl = $this->url->link('checkout/success&');
+      $this->response->redirect($redirUrl);
+
+    }else if( isset($_GET['order_id']) && isset($_GET['transaction_status']) && $_GET['transaction_status'] == 'deny') {
+      //if deny, redirect to order checkout page again
+      $redirUrl = $this->url->link('checkout/cart');
+      $this->response->redirect($redirUrl);
+
+    }else if( isset($_GET['order_id']) && !isset($_GET['transaction_status'])){ 
+      // if customer click "back" button, redirect to checkout page again
+      $redirUrl = $this->url->link('checkout/cart');
+      $this->response->redirect($redirUrl);
+    }
+    $this->response->redirect($redirUrl);
   }
 
   /**
@@ -313,6 +341,7 @@ class ControllerPaymentVeritrans extends Controller {
 
     Veritrans_Config::$isProduction = $this->config->get('veritrans_environment') == 'production' ? true : false;
     Veritrans_Config::$serverKey = $this->config->get('veritrans_server_key_v2');
+
     $this->load->model('checkout/order');
     $this->load->model('payment/veritrans');
     $notif = new Veritrans_Notification();
@@ -321,6 +350,7 @@ class ControllerPaymentVeritrans extends Controller {
     $payment_type = $notif->payment_type;
 
     $logs = '';
+    // error_log(print_r($notif,true)); // debugan
     if ($transaction == 'capture') {
       $logs .= 'capture ';
       if ($fraud == 'challenge') {
@@ -377,6 +407,6 @@ class ControllerPaymentVeritrans extends Controller {
           'VT-Web payment challenged. Please take action on '
             . 'your Merchant Administration Portal.');
     }
-    error_log($logs);
+    error_log($logs); //debugan to be commented
   }
 }
