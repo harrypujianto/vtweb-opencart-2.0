@@ -322,7 +322,8 @@ class ControllerPaymentVeritrans extends Controller {
 
     }else if( isset($_GET['order_id']) && isset($_GET['transaction_status']) && $_GET['transaction_status'] == 'deny') {
       //if deny, redirect to order checkout page again
-      $redirUrl = $this->url->link('checkout/cart');
+      // $redirUrl = $this->url->link('checkout/cart');
+      $redirUrl = $this->url->link('payment/veritrans/failure','','SSL');
       $this->response->redirect($redirUrl);
 
     }else if( isset($_GET['order_id']) && !isset($_GET['transaction_status'])){ 
@@ -331,6 +332,32 @@ class ControllerPaymentVeritrans extends Controller {
       $this->response->redirect($redirUrl);
     }
     $this->response->redirect($redirUrl);
+  }
+  
+  /*
+  * redirect to payment failure using template & language (text template)
+  */
+  public function failure() {
+    $this->load->language('payment/veritrans');
+
+    $this->document->setTitle($this->language->get('heading_title'));
+
+    $data['heading_title'] = $this->language->get('heading_title');
+    $data['text_failure'] = $this->language->get('text_failure');
+
+    $data['column_left'] = $this->load->controller('common/column_left');
+    $data['column_right'] = $this->load->controller('common/column_right');
+    $data['content_top'] = $this->load->controller('common/content_top');
+    $data['content_bottom'] = $this->load->controller('common/content_bottom');
+    $data['footer'] = $this->load->controller('common/footer');
+    $data['header'] = $this->load->controller('common/header');
+    $data['checkout_url'] = $this->url->link('checkout/cart');
+
+    if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/veritrans_checkout_failure.tpl')) {
+      $this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/payment/veritrans_checkout_failure.tpl', $data));
+    } else {
+      $this->response->setOutput($this->load->view('default/template/payment/veritrans_checkout_failure.tpl', $data));
+    }
   }
 
   /**
