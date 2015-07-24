@@ -7,18 +7,26 @@
   if ($pay_type == 'vtweb'): ?>
   <div class="buttons">
 		<div class="pull-right">
-		<input type="button" value="<?php echo $button_confirm ?>" onClick="location.href='<?php echo $process_order ?>'" class="btn btn-primary" />
+		<input type="button" value="<?php echo $button_confirm ?>" id="button-confirm" onClick="location.href='<?php echo $process_order ?>'" class="btn btn-primary"
+    data-loading-text="<?php echo $text_loading; ?>" />
 		</div>
 	</div>
+
+  <script>
+  $('#button-confirm').on('click', function() {
+    $('#button-confirm').button('loading');
+
+  });
+  </script>
     <!-- v2 VT-Web form -->
 
   <?php else: ?>
-    
+
     <div class="checkout-product">
       <form id="payment-form" method="post" action="<?php echo $process_order ?>">
         <div class="table-responsive">
 		<table class="form">
-          
+
           <thead>
             <tr>
               <td colspan="2">Please insert your credit card number:</td>
@@ -29,11 +37,11 @@
             <tr>
               <td><span class="required">*</span>Credit Card Number: </td>
               <td>
-                <input type="text" class="card-number" class="large-field" maxlength="16" />    
+                <input type="text" class="card-number" class="large-field" maxlength="16" />
               </td>
             </tr>
             <!-- CC number -->
-            
+
             <tr>
               <td><span class="required">*</span>Expiration Year (YYYY): </td>
               <td>
@@ -43,11 +51,11 @@
                     <?php $value = sprintf('%d', $i) ?>
                     <option value="<?php echo $value ?>"><?php echo $value ?></option>
                   <?php endfor; ?>
-                </select>  
+                </select>
               </td>
             </tr>
             <!-- CC expiry year -->
-            
+
             <tr>
               <td><span class="required">*</span>Expiration Month</td>
               <td>
@@ -56,16 +64,16 @@
                     <?php $value = sprintf('%02d', $i) ?>
                     <option value="<?php echo $value ?>"><?php echo $value ?></option>
                   <?php endfor; ?>
-                </select>  
+                </select>
               </td>
             </tr>
             <!-- CC expiry month -->
-            
+
             <tr>
               <td><span class="required">*</span> CVV</td>
               <td>
-                <input type="password" class="card-cvv" maxlength="4" />    
-              </td>  
+                <input type="password" class="card-cvv" maxlength="4" />
+              </td>
             </tr>
             <!-- CC CVV -->
 
@@ -80,9 +88,9 @@
           </div>
         </div>
       </form>
-    </div>      
+    </div>
     <!-- VT-Direct form -->
-    
+
     <?php if ($this->config->get('veritrans_api_version') == 1): ?>
       <script type="text/javascript">
         $(function() {
@@ -162,7 +170,7 @@
             });
           });
         });
-      </script>      
+      </script>
     <?php endif ?>
   <?php endif ?>
 <?php endif ?>
