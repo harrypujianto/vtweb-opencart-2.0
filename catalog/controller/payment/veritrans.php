@@ -295,7 +295,8 @@ class ControllerPaymentVeritrans extends Controller {
       }
 
       // $this->cart->clear();
-      $this->response->redirect($redirUrl);
+      //$this->response->redirect($redirUrl);
+      $this->response->setOutput($redirUrl);
     }
     catch (Exception $e) {
       $data['errors'][] = $e->getMessage();
