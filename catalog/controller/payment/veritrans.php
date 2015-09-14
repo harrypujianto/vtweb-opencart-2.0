@@ -52,8 +52,8 @@ class ControllerPaymentVeritrans extends Controller {
     $billing_address['address']      = $order_info['payment_address_1'];
     $billing_address['city']         = $order_info['payment_city'];
     $billing_address['postal_code']  = $order_info['payment_postcode'];
-    $billing_address['country_code'] = $order_info['payment_iso_code_3'];
     $billing_address['phone']        = $order_info['telephone'];
+    $billing_address['country_code'] = strlen($order_info['payment_iso_code_3'] != 3) ? 'IDN' : $order_info['payment_iso_code_3'];
 
     if ($this->cart->hasShipping()) {
       $shipping_address = array();
@@ -63,7 +63,7 @@ class ControllerPaymentVeritrans extends Controller {
       $shipping_address['city']         = $order_info['shipping_city'];
       $shipping_address['postal_code']  = $order_info['shipping_postcode'];
       $shipping_address['phone']        = $order_info['telephone'];
-      $shipping_address['country_code'] = $order_info['payment_iso_code_3'];
+      $shipping_address['country_code'] = strlen($order_info['payment_iso_code_3'] != 3) ? 'IDN' : $order_info['payment_iso_code_3'];
     } else {
       $shipping_address = $billing_address;
     }
