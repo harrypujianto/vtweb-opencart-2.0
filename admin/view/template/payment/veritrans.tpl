@@ -141,7 +141,8 @@
 								'echannel' 		=> 'Mandiri Bill',
 								'bbm_money'		=> 'BBM Money',
 								'cstore'		=> 'Indomaret',
-								'indosat_dompetku' => 'Indosat Dompetku'
+								'indosat_dompetku' => 'Indosat Dompetku',
+								'mandiri_ecash' => 'Mandiri Ecash'
 							  );
 						  ?>
 						  <div class="checkbox">
@@ -282,7 +283,7 @@
 							</div>
 						</div>
 						<div>
-							<center><font size="1">version 1.1</font></center>
+							<center><font size="1">version 1.2</font></center>
 						</div>
 
 				  </form>
