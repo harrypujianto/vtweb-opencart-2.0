@@ -283,7 +283,7 @@
 							</div>
 						</div>
 						<div>
-							<center><font size="1">version 1.2</font></center>
+							<center><font size="1">version 1.3</font></center>
 						</div>
 
 				  </form>
