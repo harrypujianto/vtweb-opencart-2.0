@@ -207,8 +207,8 @@ class ControllerPaymentVeritrans extends Controller {
 
       $payloads['vtweb']['enabled_payments'] = $enabled_payments;
       $is_installment = false;
-      error_log($this->config->get('veritrans_installment_option'));
-      if ($this->config->get('veritrans_installment_option') == 'all_product')
+      //error_log($this->config->get('veritrans_installment_option'));
+      /*if ($this->config->get('veritrans_installment_option') == 'all_product')
       {
         $payment_options = array(
           'installment' => array(
@@ -232,8 +232,8 @@ class ControllerPaymentVeritrans extends Controller {
         if ($transaction_details['gross_amount'] >= 500000) {
           $payloads['vtweb']['payment_options'] = $payment_options;
         }
-      }
-      else if ($this->config->get('veritrans_installment_option') == 'certain_product')
+      }*/
+      /*else if ($this->config->get('veritrans_installment_option') == 'certain_product')
       {
 
         $payment_options = array(
@@ -274,7 +274,7 @@ class ControllerPaymentVeritrans extends Controller {
           $payment_options['installment']['installment_terms'] = $installment_terms;
           $payloads['vtweb']['payment_options'] = $payment_options;
         }
-      }
+      }*/
 
       $redirUrl = Veritrans_VtWeb::getRedirectionUrl($payloads);
 
