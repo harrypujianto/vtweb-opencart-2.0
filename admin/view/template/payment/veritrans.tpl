@@ -1,6 +1,6 @@
 <?php echo $header; ?><?php echo $column_left; ?>
 <div id="content">
-	
+
 	<!--header, breadcrumb & button-->
 		<div class="page-header">
 			<div class="container-fluid">
@@ -17,14 +17,14 @@
 			</div>
 		</div>
 	<!--header, breadcrumb & button-->
-	
-	
+
+
 	<div class="container-fluid">
 		<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title"><i class="fa fa-pencil"></i> <?php echo $text_edit; ?></h3>
 				</div>
-			
+
 			<!--error-->
 			<?php if (isset($error['error_warning'])) { ?>
 			<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> <?php echo $error['error_warning']; ?>
@@ -32,11 +32,11 @@
 			</div>
 			<?php } ?>
 			<!--error-->
-		  
+
 			<div class="panel-body">
 				  <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
-					
-					
+
+
 						<div class="form-group">
 							<label class="col-sm-2 control-label" for="input-mode"><?php echo $entry_status; ?></label>
 							<div class="col-sm-3">
@@ -49,8 +49,8 @@
 							</div>
 						</div>
 						<!-- Status -->
-					
-					
+
+
 						<div class="form-group required">
 							<label class="col-sm-2 control-label" for="input-merchant-id"><?php echo $entry_display_name; ?></label>
 							<div class="col-sm-3">
@@ -63,7 +63,7 @@
 							</div>
 						</div>
 						<!-- Display name -->
-						
+
 						<div class="form-group v2_settings sensitive required">
 							<label class="col-sm-2 control-label" for="input-mode"><?php echo $entry_environment; ?></label>
 							<div class="col-sm-3">
@@ -73,15 +73,15 @@
 									<option value="<?php echo $key ?>" <?php if ($key == $veritrans_environment) echo 'selected' ?> ><?php echo $value ?></option>
 									<?php endforeach ?>
 								</select>
-							</div>	
+							</div>
 							<div class="col-sm-3">
 								<?php if (isset($error['environment'])) { ?>
 								<div class="col-sm-3"> <?php echo $error['environment']; ?> </div>
-								<?php } ?> 
+								<?php } ?>
 							</div>
 						</div>
 						<!-- Environment (v2-specific) -->
-						
+
 						<div class="form-group required v2_settings sensitive">
 							<label class="col-sm-2 control-label" for="input-merchant-id"><?php echo $entry_client_key; ?></label>
 							<div class="col-sm-3">
@@ -94,8 +94,8 @@
 							</div>
 						</div>
 						<!-- Client Key (v2-specific) -->
-						
-						
+
+
 						<div class="form-group required v2_settings sensitive">
 							<label class="col-sm-2 control-label" for="input-merchant-id"><?php echo $entry_server_key; ?></label>
 							<div class="col-sm-3">
@@ -107,8 +107,8 @@
 								<?php } ?>
 							</div>
 						</div>
-						<!-- Server Key (v2-specific) -->		
-						
+						<!-- Server Key (v2-specific) -->
+
 						<div class="form-group">
 							<label class="col-sm-2 control-label" for="input-mode"><?php echo $entry_payment_type; ?></label>
 							<div class="col-sm-3">
@@ -118,15 +118,15 @@
 								<option value="<?php echo $key ?>" <?php if ($key == $veritrans_payment_type) echo 'selected' ?> ><?php echo $value ?></option>
 								<?php endforeach ?>
 								</select>
-							</div>	
+							</div>
 							<div class="col-sm-3">
 								<?php if (isset($error['environment'])) { ?>
 								<div class="col-sm-3"> <?php echo $error['environment']; ?> </div>
-								<?php } ?> 
+								<?php } ?>
 							</div>
 						</div>
 						<!-- Payment Type -->
-						
+
 						<div class="form-group v2_settings sensitive required">
 						<label class="col-sm-2 control-label" for="input-merchant-id">Enable Payments</label>
 						  <?php
@@ -141,7 +141,8 @@
 								'echannel' 		=> 'Mandiri Bill',
 								'bbm_money'		=> 'BBM Money',
 								'cstore'		=> 'Indomaret',
-								'indosat_dompetku' => 'Indosat Dompetku'
+								'indosat_dompetku' => 'Indosat Dompetku',
+								'mandiri_ecash' => 'Mandiri Ecash'
 							  );
 						  ?>
 						  <div class="checkbox">
@@ -153,24 +154,24 @@
 									<label>
 									<input class="check-box" type="checkbox" value="on" name="veritrans_enabled_payments[<?php echo $key; ?>]" <?php if ($isChecked) echo 'checked'; ?>/>
 									<?php echo $val; ?>
-									</label>	
+									</label>
 								<?php endforeach ?>
 							</div>
-						</div>	
+						</div>
 						<!--enable payments-->
-						
+
 						<div class="form-group v2_vtweb_settings sensitive required">
 						<label class="col-sm-2 control-label" for="input-merchant-id"><?php echo $entry_3d_secure; ?></label>
-							
+
 							<div class="checkbox">
 							<label>
 							<input type="checkbox" class="check-box" name="veritrans_3d_secure" <?php if ($veritrans_3d_secure) echo 'checked'; ?> />You must enable 3D Secure. Please contact us if you wish to disable this feature in the Production environment.
 							</label>
 							</div>
-						
+
 						</div>
 						<!--enable 3D secure-->
-						
+
 					<!-- 	<div class="form-group v2_settings sensitive required">
 						<label class="col-sm-2 control-label" for="input-merchant-id">Enable Installment</label>
 							<div class="col-sm-3">
@@ -180,17 +181,17 @@
 								<option value="<?php //echo $key ?>" <?php //if ($key == $veritrans_installment_option)// echo 'selected' ?> ><?php //echo $value ?></option>
 								<?php //endforeach ?>
 								</select>
-							</div>	
+							</div>
 						</div> -->
-						<!-- Select Installment Option (v2-specific) --> 	
-						
-						
+						<!-- Select Installment Option (v2-specific) -->
+
+
 						<!-- <div class="form-group all_product certain_product installment ">
 						<label class="col-sm-2 control-label" >Installment Bank</label>
 						<?php
 							/*$installment_banks = array(
 								'bni' => 'BNI',
-								'mandiri' => 'MANDIRI'                    
+								'mandiri' => 'MANDIRI'
 							  );*/
 						  ?>
 						  <div class="checkbox">
@@ -198,37 +199,37 @@
 							<?php //$isChecked = (isset($veritrans_installment_banks) && array_key_exists($key, $veritrans_installment_banks)&& $veritrans_installment_banks[$key]);
 							?>
 								<label>
-								<input type="checkbox" class="check-box installmentBank installmentBank_<?=$key?>" 
-								name="veritrans_installment_banks[<?php //echo $key; ?>]" 
+								<input type="checkbox" class="check-box installmentBank installmentBank_<?=$key?>"
+								name="veritrans_installment_banks[<?php //echo $key; ?>]"
 								<?php// if ($isChecked) echo 'checked'; ?>>
-									<?php //echo $val; ?>		
+									<?php //echo $val; ?>
 								</label>
 							  <?php //endforeach ?>
 							</div>
 						</div> -->
-						<!-- Select Bank Installment -->     		
-						
+						<!-- Select Bank Installment -->
+
 						<!-- <div class="form-group install_term installmentTerm_bni">
 							<label class="col-sm-2 control-label" >Bni Term</label>
 							<div class="col-sm-2  ">
 								<label>
 								<input type="text" class="check-box" value="<?=$veritrans_installment_bni_term?>" name="veritrans_installment_bni_term" />
 								</label>
-							</div>  
+							</div>
 						</div> -->
 						<!-- installment bank Term-->
-						
+
 						<!-- <div class="form-group install_term installmentTerm_mandiri">
 							<label class="col-sm-2 control-label" >Mandiri Term</label>
 							<div class="col-sm-2  ">
 								<label>
-								<input type="text" class="check-box" name="veritrans_installment_mandiri_term" value=<?=$veritrans_installment_mandiri_term?>>              
+								<input type="text" class="check-box" name="veritrans_installment_mandiri_term" value=<?=$veritrans_installment_mandiri_term?>>
 								</label>
-							</div>  
+							</div>
 						</div> -->
 						<!-- installment bank Term-->
-						
-					  
+
+
 					<?php foreach (array('vtweb_success_mapping', 'vtweb_failure_mapping', 'vtweb_challenge_mapping') as $status): ?>
 						<div class="form-group required">
 						<label class="col-sm-2 control-label" for="input-merchant-id"><?php echo ${'entry_' . $status} ?></label>
@@ -238,12 +239,12 @@
 								<option value="<?php echo $option['order_status_id'] ?>" <?php if ($option['order_status_id'] == ${'veritrans_' . $status}) echo 'selected' ?> ><?php echo $option['name'] ?></option>
 							  <?php endforeach ?>
 								</select>
-							</div>	
+							</div>
 						</div>
 					<?php endforeach ?>
 					<!-- VTWeb Mapping -->
-						
-					  
+
+
 						<div class="form-group required">
 							<label class="col-sm-2 control-label" for="input-merchant-id"><?php echo $entry_currency_conversion; ?></label>
 							<div class="col-sm-3">
@@ -257,7 +258,7 @@
 							</div>
 						</div>
 					<!-- Currency -->
-										
+
 					<div class="form-group v2_vtweb_settings">
 						<label class="col-sm-2 control-label" for="input-merchant-id"><?php echo $entry_geo_zone; ?></label>
 							<div class="col-sm-3">
@@ -271,10 +272,10 @@
 									<?php } ?>
 							<?php } ?>
 								</select>
-							</div>	
+							</div>
 						</div>
-						<!-- Geo Zone -->		
-						  
+						<!-- Geo Zone -->
+
 						<div class="form-group">
 							<label class="col-sm-2 control-label" for="input-merchant-id"><?php echo $entry_sort_order; ?></label>
 							<div class="col-sm-1">
@@ -282,9 +283,9 @@
 							</div>
 						</div>
 						<div>
-							<center><font size="1">version 1.0</font></center>
-						</div>	
-	
+							<center><font size="1">version 1.3</font></center>
+						</div>
+
 				  </form>
 			 </div>
 		</div>
@@ -323,26 +324,26 @@
       $('.installmentBank:checked').each(function(){
           bankInstallment.push($(this).val());
       });
-            
+
       $('.'+installmentOption).show();
       if (installmentOption == 'all_product'){
         $.each(bankInstallment, function(index,value){
           $('.'+installmentOption+'_'+value).show();
         });
-        
+
       }
     }
 
     $("#veritransApiVersion").on('change', function(e, data) {
       sensitiveOptions();
     });
-    
+
     $("#veritransPaymentType").on('change', function(e, data) {
       sensitiveOptions();
     });
 
 	$('#installmentOption').ready(function(){
-	
+
 		var installmentOption = $('#installmentOption').val();
 		if(installmentOption == 'off')
 		{
@@ -355,11 +356,11 @@
 			$('.install_term').hide();
 		}
 		else if(installmentOption == 'all_product')
-		{	
-			$('.install_term').hide();		
-			<?php foreach (array('bni' => 'BNI', 'mandiri' => 'MANDIRI') as $name_bank => $display_bank): ?>              
+		{
+			$('.install_term').hide();
+			<?php foreach (array('bni' => 'BNI', 'mandiri' => 'MANDIRI') as $name_bank => $display_bank): ?>
 	      $('.installmentBank_<?=$name_bank?>').ready(function(){
-			   
+
 				var thisCheck = $('.installmentBank_<?=$name_bank?>');
 			if(thisCheck.is(':checked'))
 				{
@@ -370,39 +371,39 @@
 				{
 					//alert('qweqwe');
 					$('.installmentTerm_<?=$name_bank?>').hide();
-				}		
+				}
 			});
-			
-			
+
+
 			$('.installmentBank_<?=$name_bank?>').click(function(){
-			   
+
 				var thisCheck = $('.installmentBank_<?=$name_bank?>');
 			if(thisCheck.is(':checked') && $("#installmentOption").val() =="all_product")
 				{
 					$('.installmentTerm_<?=$name_bank?>').show();
 				}
 				else
-				{	
+				{
 					$('.installmentTerm_<?=$name_bank?>').hide();
-				}		
+				}
 			});
 			<?php endforeach?>
-		}	
+		}
 	});
-	
-	<?php foreach (array('bni' => 'BNI', 'mandiri' => 'MANDIRI') as $name_bank => $display_bank): ?>  
-		$('.installmentBank_<?=$name_bank?>').click(function(){		   
+
+	<?php foreach (array('bni' => 'BNI', 'mandiri' => 'MANDIRI') as $name_bank => $display_bank): ?>
+		$('.installmentBank_<?=$name_bank?>').click(function(){
 				var thisCheck = $('.installmentBank_<?=$name_bank?>');
 			if(thisCheck.is(':checked') && $("#installmentOption").val() =="all_product")
 				{
 					$('.installmentTerm_<?=$name_bank?>').show();
 				}
 				else
-				{	
+				{
 					$('.installmentTerm_<?=$name_bank?>').hide();
-				}		
+				}
 			});
-	<?php endforeach?>	
+	<?php endforeach?>
 
 	$("#installmentOption").change(function(){
 	var installmentOption = $('#installmentOption').val();
@@ -417,22 +418,22 @@
 		}
 		else if(installmentOption == "all_product")
 		{
-			<?php foreach (array('bni' => 'BNI', 'mandiri' => 'MANDIRI') as $name_bank => $display_bank): ?>  
+			<?php foreach (array('bni' => 'BNI', 'mandiri' => 'MANDIRI') as $name_bank => $display_bank): ?>
 				var thisCheck = $('.installmentBank_<?=$name_bank?>');
 			if(thisCheck.is(':checked') && $("#installmentOption").val() =="all_product")
 				{
 					$('.installmentTerm_<?=$name_bank?>').show();
 				}
 				else
-				{	
+				{
 					$('.installmentTerm_<?=$name_bank?>').hide();
-				}		
-			<?php endforeach?>	
-		
+				}
+			<?php endforeach?>
+
 		}
-	
+
 	});
-	
+
     $("#installmentOption").on('change', function(e, data) {
       setupVisibility();
     });
