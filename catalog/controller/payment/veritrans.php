@@ -294,7 +294,7 @@ class ControllerPaymentVeritrans extends Controller {
         $redirUrl = $warningUrl . $redirUrl . '&message=2';
       }
 
-      // $this->cart->clear();
+      $this->cart->clear();
       //$this->response->redirect($redirUrl);
       $this->response->setOutput($redirUrl);
     }
@@ -307,7 +307,6 @@ class ControllerPaymentVeritrans extends Controller {
 
   /**
    * Landing page when payment is finished or failure or customer pressed "back" button
-   * The Cart is cleared here, so make sure customer reach this page to ensure the cart is emptied when payment succeed
    * payment finish/unfinish/error url :
    * http://[your shop’s homepage]/index.php?route=payment/veritrans/payment_notification
    */
@@ -318,7 +317,7 @@ class ControllerPaymentVeritrans extends Controller {
 
     if( isset($_GET['order_id']) && isset($_GET['transaction_status']) && ($_GET['transaction_status'] == 'capture' || $_GET['transaction_status'] == 'pending' || $_GET['transaction_status'] == 'settlement')) {
       //if capture or pending or challenge or settlement, redirect to order received page
-      $this->cart->clear();
+      // $this->cart->clear();
       $redirUrl = $this->url->link('checkout/success&');
       $this->response->redirect($redirUrl);
 
@@ -330,7 +329,7 @@ class ControllerPaymentVeritrans extends Controller {
 
     }else if( isset($_GET['order_id']) && !isset($_GET['transaction_status'])){
       // if customer click "back" button, redirect to checkout page again
-      $redirUrl = $this->url->link('checkout/cart');
+      $redirUrl = $this->url->link('account/order');
       $this->response->redirect($redirUrl);
     }
     $this->response->redirect($redirUrl);
@@ -353,7 +352,7 @@ class ControllerPaymentVeritrans extends Controller {
     $data['content_bottom'] = $this->load->controller('common/content_bottom');
     $data['footer'] = $this->load->controller('common/footer');
     $data['header'] = $this->load->controller('common/header');
-    $data['checkout_url'] = $this->url->link('checkout/cart');
+    $data['checkout_url'] = $this->url->link('account/order');
 
     if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/veritrans_checkout_failure.tpl')) {
       $this->response->setOutput($this->load->view($this->config->get('config_template') . '/template/payment/veritrans_checkout_failure.tpl', $data));
