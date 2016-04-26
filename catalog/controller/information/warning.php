@@ -4,7 +4,7 @@ class ControllerInformationWarning extends Controller {
         $this->document->setTitle('warning'); //Optional. Set the title of your web page.
         $message = "Sorry, we are unable to proceed your transaction with installment.<br>";
         $message .= $_GET["message"]==1?"Transaction with installment is only allowed for one product type on your cart.<br><br>":"Transaction with installment is only allowed for transaction amount above Rp 500.000 <br><br>";
-    
+
         $data['breadcrumb']= array(
             'message'      => $message,
             'href'      => $_GET["redirLink"],
