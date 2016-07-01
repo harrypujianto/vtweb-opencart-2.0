@@ -17,7 +17,11 @@ class ControllerPaymentVeritransmandiri extends Controller {
     if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/veritransmandiri.tpl')) {
         return $this->load->view($this->config->get('config_template') . '/template/payment/veritransmandiri.tpl',$data);
     } else {
-      return $this->load->view('default/template/payment/veritransmandiri.tpl', $data);
+      if (VERSION > 2.1 ) {
+        return $this->load->view('payment/veritransmandiri', $data);
+      } else {
+        return $this->load->view('default/template/payment/veritransmandiri.tpl', $data);
+      }
     }
 
   }

@@ -17,7 +17,11 @@ class ControllerPaymentVeritransbcains extends Controller {
     if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/veritransbcains.tpl')) {
         return $this->load->view($this->config->get('config_template') . '/template/payment/veritransbcains.tpl',$data);
     } else {
-      return $this->load->view('default/template/payment/veritransbcains.tpl', $data);
+      if (VERSION > 2.1 ) {
+        return $this->load->view('payment/veritransbcains', $data);
+      } else {
+        return $this->load->view('default/template/payment/veritransbcains.tpl', $data);
+      }
     }
 
   }

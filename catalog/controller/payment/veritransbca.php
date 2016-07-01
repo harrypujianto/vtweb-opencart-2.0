@@ -17,7 +17,13 @@ class ControllerPaymentVeritransbca extends Controller {
     if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/veritransbca.tpl')) {
         return $this->load->view($this->config->get('config_template') . '/template/payment/veritransbca.tpl',$data);
     } else {
-      return $this->load->view('default/template/payment/veritransbca.tpl', $data);
+
+      if (VERSION > 2.1 ) {
+        return $this->load->view('payment/veritransbca', $data);
+      } else {
+        return $this->load->view('default/template/payment/veritransbca.tpl', $data);
+      }
+
     }
 
   }

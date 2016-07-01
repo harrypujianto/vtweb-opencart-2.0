@@ -11,15 +11,17 @@ class ControllerPaymentVeritrans extends Controller {
 
   	$data['pay_type'] = $this->config->get('veritrans_payment_type');
     $data['text_loading'] = $this->language->get('text_loading');
-
   	$data['process_order'] = $this->url->link('payment/veritrans/process_order');
 
-    if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/veritrans.tpl')) {
+    if (file_exists(DIR_TEMPLATE . $this->config->get('config_template') . '/template/payment/veritrans.tpl')) {    
         return $this->load->view($this->config->get('config_template') . '/template/payment/veritrans.tpl',$data);
   	} else {
-  	  return $this->load->view('default/template/payment/veritrans.tpl', $data);
+      if (VERSION > 2.1 ) {
+        return $this->load->view('payment/veritrans', $data);
+      } else {
+        return $this->load->view('default/template/payment/veritrans.tpl', $data);
+      }
   	}
-
   }
 
   /**
