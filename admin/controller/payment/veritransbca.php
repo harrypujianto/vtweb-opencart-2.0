@@ -105,7 +105,7 @@ class ControllerPaymentVeritransbca extends Controller {
       'veritransbca_payment_type',
       'veritransbca_currency_conversion',
       'veritransbca_status',
-      'veritransbca_vtweb_success_mapprg',
+      'veritransbca_vtweb_success_mapping',
       'veritransbca_vtweb_failure_mapping',
       'veritransbca_vtweb_challenge_mapping',
       'veritransbca_display_name',
