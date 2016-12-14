@@ -364,6 +364,27 @@ class ControllerPaymentVeritrans extends Controller {
     }
   }
 
+  // Response early with 200 OK status for Midtrans notification & handle HTTP GET
+  public function earlyResponse(){
+    if ( $_SERVER['REQUEST_METHOD'] == 'GET' ){
+      die('This endpoint should not be opened using browser (HTTP GET). This endpoint is for Midtrans notification URL (HTTP POST)');
+      exit();
+    }
+
+    ob_start();
+
+    $input_source = "php://input";
+    $raw_notification = json_decode(file_get_contents($input_source), true);
+    echo "Notification Received: \n";
+    print_r($raw_notification);
+    
+    header('Connection: close');
+    header('Content-Length: '.ob_get_length());
+    ob_end_flush();
+    ob_flush();
+    flush();
+  }
+
   /**
    * Called when Veritrans server sends notification to this server.
    * It will change order status according to transaction status and fraud
@@ -374,6 +395,8 @@ class ControllerPaymentVeritrans extends Controller {
 
     Veritrans_Config::$isProduction = $this->config->get('veritrans_environment') == 'production' ? true : false;
     Veritrans_Config::$serverKey = $this->config->get('veritrans_server_key_v2');
+
+    $this->earlyResponse();
 
     $this->load->model('checkout/order');
     $this->load->model('payment/veritrans');
